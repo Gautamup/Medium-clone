@@ -21,6 +21,10 @@ export const Publish = () => {
                     setDescription(e.target.value)
                 }} />
                 <button onClick={async () => {
+                    if(!title || !description){
+                        alert("Enter title or description")
+                        return;
+                    }
                     const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
                         title,
                         content: description
