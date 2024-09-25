@@ -34,11 +34,11 @@ export const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
                         </div>
                         <div className="text-slate-400">
                             {type === 'signin' ? 'Dont have an account?' : "Alrady have an account?"}
-                            <Link className="pl-2 underline" to={type === 'signin' ? "/signup" : '/signin'}> {type === 'signin' ? "Sign up" : 'Sign in'}</Link>
+                            <Link className="pl-2 underline" to={type === 'signin' ? "/" : '/signin'}> {type === 'signin' ? "Sign up" : 'Sign in'}</Link>
                         </div>
                     </div>
                     <div className="pt-8">
-                        {type === "signup" ? <LabelledInput label="Name" placeholder="Gotti gang.." onChange={(e: any) => {
+                        {type === "signup" ? <LabelledInput label="Name" placeholder="Try dummy Name & Email" onChange={(e: any) => {
                             setpostInputs(c => ({
                                 ...c,
                                 name: e.target.value,
