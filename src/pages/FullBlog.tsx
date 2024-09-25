@@ -32,7 +32,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                                     {blog.author.name || "Anonymous"}
                                 </div>
                                 <div className="pt-2 text-slate-500">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Senior at NIT Jalandhar
                                 </div>
                             </div>
                         </div>
