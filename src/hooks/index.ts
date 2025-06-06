@@ -8,13 +8,13 @@ export interface Blog{
     id:string;
     author:{
         name:string
-    }
+    },
+    createdAt:string
 }
 
 export const useBlog = ({id}:{id:string;}) => {
     const [loading, setLoading] = useState(true);
     const [blog, setBlog] = useState<Blog>();
-
     useEffect(() => {    
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
             headers: {
@@ -41,6 +41,7 @@ export const useBlogs = () => {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`)
         .then(response => {
             setBlogs(response.data.blogs);
+            // console.log(response.data.blogs);  
             setLoading(false);
         })
     }, [])

@@ -3,6 +3,14 @@ import { Appbar } from "../components/Appbar"
 import { Blog } from "../hooks"
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
+    const fn = (date:string) =>{
+        // console.log(date);
+        let year = date.substring(0,4);
+        let month = date.substring(5,7);
+        let nDate = date.substring(8,10);
+        let newDate = nDate + "-" + month + "-" + year;
+        return newDate;
+    };
     return (
         <div>
             <Appbar />
@@ -13,7 +21,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                             {blog.title}
                         </div>
                         <div className="text-slate-400 pt-2">
-                            Posted on 2nd dec 2023
+                            Posted on {fn(blog.createdAt)}
                         </div>
                         <div className="pt-4 ">
                             {blog.content}
