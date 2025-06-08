@@ -6,6 +6,15 @@ import { useBlogs } from "../hooks"
 export const Blogs = () => {
     const { loading, blogs } = useBlogs();
     // console.log(blogs)
+    blogs.sort((a,b) => {
+            if(a.createdAt < b.createdAt){
+                return 1;
+            }
+            if(a.createdAt > b.createdAt){
+                return -1;
+            }
+            return 0;
+        });
     if (loading) {
         return <div>
             <Appbar /> 
@@ -34,6 +43,7 @@ export const Blogs = () => {
             <div className="flex justify-center">
                 <div >
                     {blogs.map(blog => <BlogCard
+                            key={blog.id}
                             id={blog.id}
                             authorName={blog.author.name || "Anonymous"}
                             title={blog.title}

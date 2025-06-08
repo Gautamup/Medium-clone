@@ -42,6 +42,7 @@ export const useBlogs = () => {
         .then(response => {
             setBlogs(response.data.blogs);
             // console.log(response.data.blogs);  
+            // setBlogs(blogs.reverse())
             setLoading(false);
         })
     }, [])

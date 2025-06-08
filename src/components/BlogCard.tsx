@@ -34,7 +34,7 @@ export const BlogCard = ({
                     {content.slice(0, 100) + "..."}
                 </div>
                 <div className="text-slate-500 text-sm font-thin pt-4">
-                    {`${Math.ceil(content.length / 100)} minutes`}
+                    {`${Math.ceil(content.length / 1000)} minutes`}
                 </div>
             </div>
         </Link>
