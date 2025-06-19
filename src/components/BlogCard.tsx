@@ -30,9 +30,10 @@ export const BlogCard = ({
                 <div className="font-semibold text-xl pt-2">
                     {title}
                 </div>
-                <div className="text-md font-thin">
+                {/* <div className="text-md font-thin">
                     {content.slice(0, 100) + "..."}
-                </div>
+                </div> */}
+                <div className="text-md font-thin" dangerouslySetInnerHTML={{__html: content.slice(0, 100) + "..." }} />
                 <div className="text-slate-500 text-sm font-thin pt-4">
                     {`${Math.ceil(content.length / 1000)} minutes`}
                 </div>
