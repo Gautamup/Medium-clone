@@ -41,7 +41,10 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                                     {blog.author.name || "Anonymous"}
                                 </div>
                                 <div className="pt-2 text-slate-500">
-                                    Senior at NIT Jalandhar
+                                    Software Developer @Shorthills AI
+                                </div>
+                                <div className="text-slate-500">
+                                    NIT Jalandhar
                                 </div>
                             </div>
                         </div>
