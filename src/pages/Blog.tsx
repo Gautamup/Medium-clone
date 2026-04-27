@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { FullBlog } from "./FullBlog";
 import { Appbar } from "../components/Appbar";
 import { Spinner } from "../components/Spinner";
+import { Footer } from "../components/footer";
 
 export const Blog = () => {
     const { id } = useParams();
@@ -17,6 +18,7 @@ export const Blog = () => {
                         <Spinner />
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

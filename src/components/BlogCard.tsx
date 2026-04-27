@@ -11,42 +11,54 @@ interface BlogCardType {
 export const BlogCard = ({
     authorName, title, content, publishedDate, id
 }: BlogCardType) => {
-    // console.log("Reached here")
-    return (
-        <Link to={`/blog/${id}`} >
-            <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">
-                <div className="flex">
-                    {/* <Avatar name={authorName} size="small" /> */}
-                    <div className="font-extralight pl-2 text-sm
-            flex justify-center flex-col">
-                        {authorName}
-                    </div>
-                    <div className="flex justify-center flex-col pl-2">
-                        <Circle />
-                    </div>
-                    <div className="pl-2 text-slate-500 text-sm
-            flex justify-center flex-col">{publishedDate}</div>
-                </div>
-                <div className="font-semibold text-xl pt-2">
-                    {title}
-                </div>
-                {/* <div className="text-md font-thin">
-                    {content.slice(0, 100) + "..."}
-                </div> */}
-                <div className="text-md font-thin" dangerouslySetInnerHTML={{__html: content.slice(0, 100) + "..." }} />
-                <div className="text-slate-500 text-sm font-thin pt-4">
-                    {`${Math.ceil(content.length / 1000)} minutes`}
-                </div>
-            </div>
-        </Link>
-    )
-}
+    const visualVariants = ["visual-blue", "visual-green", "visual-violet"];
+    const visualSeed = `${id}-${title}`;
+    const visualIndex = Math.abs(
+        visualSeed.split("").reduce((accumulator, character) => accumulator + character.charCodeAt(0), 0)
+    );
+    const visualClass = visualVariants[visualIndex % visualVariants.length];
 
+    return (
+        <Link to={`/blog/${id}`} className="block h-full">
+            <article className="article-card h-full rounded-[24px] transition duration-300 hover:-translate-y-1 hover:border-white/16 hover:shadow-[0_28px_70px_rgba(0,0,0,0.4)]">
+                <div className={`article-visual ${visualClass}`} />
+                <div className="relative z-10 flex h-[236px] flex-col px-5 pb-5 pt-4">
+                    <div className="flex items-center gap-3 text-[15px] text-white/68">
+                        <div className="font-medium text-white/88">
+                            {authorName}
+                        </div>
+                        <Circle />
+                        <div>{publishedDate}</div>
+                    </div>
+                    <h2 className="mt-3 text-[1.4rem] font-semibold leading-tight text-white">
+                        {title}
+                    </h2>
+                    <div
+                        className="card-copy content-fade mt-3 text-sm leading-6"
+                        style={{
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            WebkitLineClamp: 3,
+                            overflow: "hidden"
+                        }}
+                        dangerouslySetInnerHTML={{ __html: content.slice(0, 132) + "..." }}
+                    />
+                    <div className="mt-auto flex items-center justify-between pt-5 text-sm">
+                        <div className="font-semibold text-white/82">
+                            Engineering
+                        </div>
+                        <div className="content-fade">
+                            {`${Math.ceil(content.length / 1000)} min read`}
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </Link>
+    );
+};
 
 export function Circle() {
-    return <div className="h-1 w-1 rounded-full bg-slate-500">
-
-    </div>
+    return <div className="h-1.5 w-1.5 rounded-full bg-white/45" />;
 }
 
 // export function Avatar({ name, size = "small" }: { name: string; size: "small" | "big" }) {

@@ -4,12 +4,14 @@ import { Signin } from './pages/Signin'
 import { Blog } from './pages/Blog'
 import { Blogs } from './pages/Blogs'
 import { Publish } from './pages/Publish'
+import { ScrollToTop } from './components/ScrollToTop'
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* <Route path="/" element={<Signup />} /> */}
           <Route path="/signin" element={<Signin />} />

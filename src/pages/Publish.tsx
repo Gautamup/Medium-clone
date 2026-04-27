@@ -6,18 +6,34 @@ import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useMemo} from "react";
 
+const blogTypes = ["Engineering", "LLMs", "RAG", "Systems"];
+
 export const Publish = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [blogType, setBlogType] = useState("Engineering");
     const navigate = useNavigate();
 
-    return <div>
+    return <div className="page-shell">
         <Appbar />
-        <div className="flex justify-center w-full pt-8"> 
-            <div className="max-w-screen-lg w-full">
-                <input onChange={(e) => {
-                    setTitle(e.target.value)
-                }} type="text" className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title" />
+        <div className="flex justify-center w-full px-4 py-8"> 
+            <div className="w-full max-w-screen-lg rounded-[28px] border border-white/10 bg-black/45 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-sm md:p-8">
+                <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px]">
+                    <input onChange={(e) => {
+                        setTitle(e.target.value)
+                    }} type="text" className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-sm text-white outline-none placeholder:text-white/35" placeholder="Title" />
+                    <select
+                        value={blogType}
+                        onChange={(e) => setBlogType(e.target.value)}
+                        className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none"
+                    >
+                        {blogTypes.map((type) => (
+                            <option key={type} value={type} className="bg-[#0d0d0d] text-white">
+                                {type}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
                 <TextEditor setDescription={setDescription}/>
                 <button onClick={async () => {
@@ -27,14 +43,15 @@ export const Publish = () => {
                     }
                     const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
                         title,
-                        content: description
+                        content: description,
+                        blog_type: blogType
                     }, {
                         headers: {
                             Authorization: localStorage.getItem("token")
                         }
                     });
                     navigate(`/blog/${response.data.id}`)
-                }} type="submit" className="mt-4 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                }} type="submit" className="mt-4 inline-flex items-center rounded-2xl bg-white px-5 py-3 text-sm font-medium text-center text-black transition hover:bg-white/90">
                     Publish post
                 </button>
             </div>
